@@ -1,7 +1,7 @@
 class PrototypesController < ApplicationController
   before_action :authenticate_user!, only: [:create, :edit, :destroy]
   before_action :set_protospace, only: [:edit, :show]
-  before_action :move_to_index, except: [:index, :show, ]
+  before_action :move_to_index, except: [:index, :show ]
 
   def new
     @prototype = Prototype.new
@@ -55,9 +55,10 @@ class PrototypesController < ApplicationController
   end
   
   def move_to_index
-    unless user_signed_in?
+    if user_signed_in?
       redirect_to action: :index
     end
   end
+
 end
 
